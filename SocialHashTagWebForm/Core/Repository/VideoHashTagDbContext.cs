@@ -12,6 +12,11 @@ namespace SocialHashTagWebForm.Core.Repository
             Database.SetInitializer<VideoHashTagDbContext>(null);
         }
 
+        public static VideoHashTagDbContext Create()
+        {
+            return new VideoHashTagDbContext();
+        }
+
         public DbSet<VideoHashTag> Videos { get; set; }
     }
 }
