@@ -7,7 +7,7 @@ namespace SocialHashTagWebForm.Core.Repository
 {
     public class VideoHashTagDbContext : DbContext
     {
-        public VideoHashTagDbContext()
+        public VideoHashTagDbContext() : base("DefaultConnection")
         {
             Database.SetInitializer<VideoHashTagDbContext>(null);
         }
