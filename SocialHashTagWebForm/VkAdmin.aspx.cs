@@ -1,24 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Configuration;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using SocialHashTagWebForm.Core;
 using SocialHashTagWebForm.Core.Providers.Vkontakte;
 using SocialHashTagWebForm.Core.Repository;
 using SocialHashTagWebForm.Core.ViewModels;
-using SocialHashTagWebForm.Core.Vkontakte;
 
 namespace SocialHashTagWebForm
 {
     public partial class VkAdmin : System.Web.UI.Page
     {
-        VkMessageProvider vkMessageProvider=new VkMessageProvider();
+        VkMessageProvider vkMessageProvider = new VkMessageProvider();
         static MessagesViewModel messagesViewModel;
 
         protected async void Page_Load(object sender, EventArgs e)
@@ -38,15 +31,12 @@ namespace SocialHashTagWebForm
                 {
                     AuthButtonLinkButton.Visible = true;
                 }
-                
             }
-            
+
             if (!IsPostBack)
             {
-                
                 try
                 {
-                    
                     MessagesRepeater.DataSource = messagesViewModel;
                     MessagesRepeater.DataBind();
                 }
@@ -54,7 +44,6 @@ namespace SocialHashTagWebForm
                 {
                     AuthButtonLinkButton.Visible = true;
                 }
-                
             }
         }
 
@@ -80,12 +69,11 @@ namespace SocialHashTagWebForm
                 var mvm = messagesViewModel.FirstOrDefault(i => i.Id == messageId);
                 if (mvm != null)
                 {
-                    await new RepositoryManager().SaveMessageViewModel(mvm,vkMessageProvider.ProviderName);
+                    await new RepositoryManager().SaveMessageViewModel(mvm, vkMessageProvider.ProviderName);
                 }
             }
             messagesViewModel = null;
         }
-
 
         protected async void UnLike_Click(object sender, EventArgs e)
         {

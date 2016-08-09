@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Configuration;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using SocialHashTagWebForm.Core;
 using SocialHashTagWebForm.Core.Providers.FaceBook;
-using SocialHashTagWebForm.Core.Providers.Vkontakte;
 using SocialHashTagWebForm.Core.Repository;
 using SocialHashTagWebForm.Core.ViewModels;
 
@@ -18,6 +12,7 @@ namespace SocialHashTagWebForm
     {
         readonly FacebookMessageProvider fbMessageProvider = new FacebookMessageProvider();
         static MessagesViewModel _messagesViewModel;
+
         protected async void Page_Load(object sender, EventArgs e)
         {
             AuthButtonLinkButton.Visible = false;
@@ -35,15 +30,12 @@ namespace SocialHashTagWebForm
                 {
                     AuthButtonLinkButton.Visible = true;
                 }
-
             }
 
             if (!IsPostBack)
             {
-
                 try
                 {
-
                     MessagesRepeater.DataSource = _messagesViewModel;
                     MessagesRepeater.DataBind();
                 }
@@ -51,7 +43,6 @@ namespace SocialHashTagWebForm
                 {
                     AuthButtonLinkButton.Visible = true;
                 }
-
             }
         }
 

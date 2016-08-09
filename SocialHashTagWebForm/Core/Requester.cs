@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -10,6 +11,7 @@ namespace SocialHashTagWebForm.Core
         {
             var httpClient = new WebClient();
             string response = null;
+
             if (method == RequestMethod.Get || body==null)
             {
                 response = await httpClient.DownloadStringTaskAsync(url);

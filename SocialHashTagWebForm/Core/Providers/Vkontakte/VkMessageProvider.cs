@@ -18,8 +18,9 @@ namespace SocialHashTagWebForm.Core.Providers.Vkontakte
                 throw new UnauthorizedAccessException();
             }
 
-            var response=await new Requester<NewsSearch>().GetResponse(requestUri);
             var requestUri = string.Format(requestUrlFormat, Uri.EscapeDataString(tag));
+            var response = await new Requester<NewsSearch>().GetResponse(requestUri);
+
             var result = new List<MessageItem>();
             foreach (var item in response.Response.Items)
             {
@@ -37,13 +38,15 @@ namespace SocialHashTagWebForm.Core.Providers.Vkontakte
                 Provider = "VK",
                 Message = item.Text,
                 MessageUrl = item.Id.ToString(),
-               
             };
+
             if (messageItem.Message != null && messageItem.Message.Length > 1000)
             {
                 messageItem.Message = messageItem.Message.Substring(0, 1000);
             }
+
             var videoAttach = item.Attachments?.FirstOrDefault(i => i.Type == "video");
+
             if (videoAttach != null)
             {
                 var videId = GetVideoId(videoAttach);
@@ -52,11 +55,9 @@ namespace SocialHashTagWebForm.Core.Providers.Vkontakte
                     messageItem.VideoEmbebbedUrl = await GetVideoUrl(videoAttach, videId);
                 }
             }
+
             return messageItem;
-
         }
-
-
 
         private async Task<string> GetVideoUrl(Attachment videoAttach, string videId)
         {
@@ -81,7 +82,6 @@ namespace SocialHashTagWebForm.Core.Providers.Vkontakte
         }
 
         private string requestUrlFormat = "https://api.vk.com/method/newsfeed.search?count=100&q={0}&v=5.53";
-
 
         private string authUrl = "https://oauth.vk.com/authorize?client_id=5575720&redirect_uri=http://hashtags.1gb.ru/verify";
 

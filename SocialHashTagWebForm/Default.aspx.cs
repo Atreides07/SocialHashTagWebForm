@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using SocialHashTagWebForm.Core.Repository;
 
@@ -14,7 +11,7 @@ namespace SocialHashTagWebForm
         {
             if (!IsPostBack)
             {
-                var videoHashTags = new VideoHashTagDbContext().Videos.OrderByDescending(i=>i.AddTime).Take(10).ToList();
+                var videoHashTags = new VideoHashTagDbContext().Videos.OrderByDescending(i => i.AddTime).Take(10).ToList();
                 MessagesRepeater.DataSource = videoHashTags;
                 MessagesRepeater.DataBind();
             }
