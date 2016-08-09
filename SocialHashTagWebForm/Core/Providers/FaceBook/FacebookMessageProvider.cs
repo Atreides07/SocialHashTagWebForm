@@ -12,7 +12,7 @@ namespace SocialHashTagWebForm.Core.Providers.FaceBook
         public string ClientId = "597660050424155";
         public string ClientSecret = "f2ba8fdd5757d41a4747c3b08005210e";
 
-        public string AccessCode { get; set; }
+        public static string AccessCode { get; set; }
 
         public Task<IList<MessageItem>> Get(string tag)
         {
@@ -29,7 +29,7 @@ namespace SocialHashTagWebForm.Core.Providers.FaceBook
             get
             {
                 var localUrl = LocalUrlHelper.GetLocalUrl();
-                return $"https://www.facebook.com/dialog/oauth?client_id={ClientId}&redirect_uri={localUrl}FbAdminVerify.aspx";
+                return $"https://www.facebook.com/dialog/oauth?client_id={ClientId}&redirect_uri={localUrl}FbAdminVerify.aspx&response_type=token";
             }
         }
 

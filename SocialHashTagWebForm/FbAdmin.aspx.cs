@@ -55,11 +55,9 @@ namespace SocialHashTagWebForm
             }
         }
 
-        protected async void OnClick(object sender, EventArgs e)
+        protected void OnClick(object sender, EventArgs e)
         {
             var authUrl = fbMessageProvider.AuthUrl;
-
-            //fbMessageProvider.AccessCode = await new WebClient().DownloadStringTaskAsync(authUrl);
 
             Response.Redirect(authUrl);
         }
