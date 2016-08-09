@@ -159,6 +159,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
+    <Content Include="FbAdmin.aspx" />
+    <Content Include="FbAdminVerify.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -216,22 +218,37 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Core\IMessageProvider.cs" />
+    <Compile Include="Core\Providers\FaceBook\FacebookMessageProvider.cs" />
     <Compile Include="Core\Repository\RepositoryManager.cs" />
     <Compile Include="Core\Repository\VideoHashTagDbContext.cs" />
     <Compile Include="Core\Repository\VideoHashTag.cs" />
     <Compile Include="Core\Requester.cs" />
     <Compile Include="Core\ViewModels\MessageItemVIewModel.cs" />
-    <Compile Include="Core\Vkontakte\NewsSearchModels\NewsSearch.cs" />
-    <Compile Include="Core\Vkontakte\VideoGetModels\Item.cs" />
-    <Compile Include="Core\Vkontakte\VideoGetModels\Response.cs" />
-    <Compile Include="Core\Vkontakte\VideoGetModels\VedioGetResponse.cs" />
-    <Compile Include="Core\Vkontakte\VkMessageProvider.cs" />
+    <Compile Include="Core\Providers\Vkontakte\NewsSearchModels\NewsSearch.cs" />
+    <Compile Include="Core\Providers\Vkontakte\VideoGetModels\Item.cs" />
+    <Compile Include="Core\Providers\Vkontakte\VideoGetModels\Response.cs" />
+    <Compile Include="Core\Providers\Vkontakte\VideoGetModels\VedioGetResponse.cs" />
+    <Compile Include="Core\Providers\Vkontakte\VkMessageProvider.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FbAdmin.aspx.cs">
+      <DependentUpon>FbAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FbAdmin.aspx.designer.cs">
+      <DependentUpon>FbAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FbAdminVerify.aspx.cs">
+      <DependentUpon>FbAdminVerify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FbAdminVerify.aspx.designer.cs">
+      <DependentUpon>FbAdminVerify.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -279,7 +296,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>57780</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:57780/</IISUrl>
+          <IISUrl>http://localhost:5771/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

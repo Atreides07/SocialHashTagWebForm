@@ -1,4 +1,4 @@
-﻿<%@ Page Async="true" Language="C#" AutoEventWireup="true" CodeBehind="VkAdmin.aspx.cs" Inherits="SocialHashTagWebForm.VkAdmin" %>
+﻿<%@ Page Async="true" Language="C#" AutoEventWireup="true" CodeBehind="FbAdmin.aspx.cs" Inherits="SocialHashTagWebForm.FbAdmin" %>
 
 <!DOCTYPE html>
 
@@ -19,9 +19,8 @@
                         <iframe title="YouTube video player" class="youtube-player" type="text/html"
                             width="640" height="390" src='<%# Eval("VideoEmbebbedUrl") %>'
                             frameborder="0" allowfullscreen></iframe>
-                        
-                        <asp:LinkButton Visible='<%# Eval("Approved") %>' runat="server" Text="Одобрить" ForeColor="Green" CommandArgument='<%# Eval("Id") %>'  OnClick="Like_Click"></asp:LinkButton>
-                        <asp:LinkButton Visible='<%# Eval("Unknown") %>' runat="server" Text="Отозвать" ForeColor="Red" CommandArgument='<%# Eval("Id") %>'  OnClick="UnLike_Click"></asp:LinkButton>
+
+                        <asp:LinkButton  runat="server" Text="Одобрить" CommandArgument='<%# Eval("Id") %>' OnClick="Like_Click"></asp:LinkButton>
                     </div>
                 </ItemTemplate>
             </asp:Repeater>

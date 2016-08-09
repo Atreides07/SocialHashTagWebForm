@@ -9,6 +9,7 @@ using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using SocialHashTagWebForm.Core;
+using SocialHashTagWebForm.Core.Providers.Vkontakte;
 using SocialHashTagWebForm.Core.Repository;
 using SocialHashTagWebForm.Core.ViewModels;
 using SocialHashTagWebForm.Core.Vkontakte;
@@ -82,9 +83,24 @@ namespace SocialHashTagWebForm
                     await new RepositoryManager().SaveMessageViewModel(mvm,vkMessageProvider.ProviderName);
                 }
             }
-
+            messagesViewModel = null;
         }
 
-        
+
+        protected async void UnLike_Click(object sender, EventArgs e)
+        {
+            var linkButton = sender as LinkButton;
+            string messageId = linkButton.CommandArgument;
+            if (messagesViewModel != null)
+            {
+                var mvm = messagesViewModel.FirstOrDefault(i => i.Id == messageId);
+                if (mvm != null)
+                {
+                    await new RepositoryManager().DeleteMessageViewModel(mvm, vkMessageProvider.ProviderName);
+                }
+            }
+
+            messagesViewModel = null;
+        }
     }
 }

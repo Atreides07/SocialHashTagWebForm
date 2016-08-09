@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Newtonsoft.Json;
 using SocialHashTagWebForm.Core;
+using SocialHashTagWebForm.Core.Providers.Vkontakte;
 using SocialHashTagWebForm.Core.Vkontakte;
 
 namespace SocialHashTagWebForm

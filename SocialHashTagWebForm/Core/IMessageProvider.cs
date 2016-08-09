@@ -26,6 +26,7 @@ namespace SocialHashTagWebForm.Core
     public interface IMessageProvider
     {
         Task<IList<MessageItem>> Get(string tag);
+        string ProviderName { get;}
     }
 
     public enum RequestMethod

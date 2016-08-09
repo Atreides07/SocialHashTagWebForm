@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Microsoft.Ajax.Utilities;
+using SocialHashTagWebForm.Core.Repository;
 
 namespace SocialHashTagWebForm.Core.ViewModels
 {
@@ -10,10 +12,12 @@ namespace SocialHashTagWebForm.Core.ViewModels
         public MessagesViewModel(IList<MessageItem> messages, string provderName)
         {
             RequestTime = DateTime.Now;
-
-            foreach(var message in messages)
+            using (var context = new VideoHashTagDbContext())
             {
-                Add(new MessageItemViewModel(message, provderName));
+                foreach (var message in messages)
+                {
+                    Add(new MessageItemViewModel(message, provderName,context));
+                }
             }
         }
 
@@ -25,7 +29,7 @@ namespace SocialHashTagWebForm.Core.ViewModels
     public class MessageItemViewModel
     {
         
-        public MessageItemViewModel(MessageItem messageItem, string providerName)
+        public MessageItemViewModel(MessageItem messageItem, string providerName, VideoHashTagDbContext context)
         {
             this.Id = messageItem.Id;
             this.Message = messageItem.Message;
@@ -33,7 +37,14 @@ namespace SocialHashTagWebForm.Core.ViewModels
             this.Provider = messageItem.Provider;
             this.VideoEmbebbedUrl = messageItem.VideoEmbebbedUrl;
             UniqueId = providerName + "_" + messageItem.Id;
+            var videoHashTag = context.Videos.FirstOrDefault(i => i.UniqueId == UniqueId);
+            Approved = videoHashTag!=null;
+            Unknown = !Approved;
         }
+
+        public bool Unknown { get; set; }
+
+        public bool Approved { get; set; }
 
         public string Id { get; set; }
         public string Provider { get; set; }

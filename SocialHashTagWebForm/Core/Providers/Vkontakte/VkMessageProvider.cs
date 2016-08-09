@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using SocialHashTagWebForm.Core.Vkontakte.NewsSearchModels;
+using SocialHashTagWebForm.Core.Vkontakte.VideoGetModels;
+using Item = SocialHashTagWebForm.Core.Vkontakte.NewsSearchModels.Item;
 
-namespace SocialHashTagWebForm.Core.Vkontakte
+namespace SocialHashTagWebForm.Core.Providers.Vkontakte
 {
     public class VkMessageProvider : IMessageProvider
     {
@@ -59,7 +61,7 @@ namespace SocialHashTagWebForm.Core.Vkontakte
         private async Task<string> GetVideoUrl(Attachment videoAttach, string videId)
         {
             var url = $"https://api.vk.com/method/video.get?count=50&videos={videId}&v=5.53&access_token=" + AccessCode;
-            var videoGetResponse = await new Requester<VideoGetModels.VedioGetResponse>().GetResponse(url);
+            var videoGetResponse = await new Requester<VedioGetResponse>().GetResponse(url);
 
             return videoGetResponse.Response?.Items.FirstOrDefault()?.Player;
         }

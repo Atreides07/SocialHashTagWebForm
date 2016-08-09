@@ -29,5 +29,17 @@ namespace SocialHashTagWebForm.Core.Repository
                 await context.SaveChangesAsync();
             }
         }
+
+        public async Task DeleteMessageViewModel(MessageItemViewModel mvm, string providerName)
+        {
+            var uniqueId = mvm.UniqueId;
+            var context = new VideoHashTagDbContext();
+            var videoHashTag = await context.Videos.FirstOrDefaultAsync(i => i.UniqueId == uniqueId);
+            if (videoHashTag != null)
+            {
+                context.Videos.Remove(videoHashTag);
+                await context.SaveChangesAsync();
+            }
+        }
     }
 }
