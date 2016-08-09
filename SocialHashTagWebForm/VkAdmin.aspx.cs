@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
@@ -86,7 +87,7 @@ namespace SocialHashTagWebForm
                     videoTag.VideoUrl = mvm.VideoEmbebbedUrl;
 
                     var context=new VideoHashTagDbContext();
-                    var videoHashTag = context.Videos.First(i => i.UniqueId == videoTag.UniqueId);
+                    var videoHashTag = await context.Videos.FirstOrDefaultAsync(i => i.UniqueId == videoTag.UniqueId);
                     if (videoHashTag==null)
                     {
                         context.Videos.Add(videoTag);

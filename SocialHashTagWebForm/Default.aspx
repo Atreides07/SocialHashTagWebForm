@@ -11,15 +11,10 @@
         <div>
             <asp:Repeater runat="server" ID="MessagesRepeater">
                 <ItemTemplate>
-                    <div style='display: <%# Eval("Display") %>'>
-                        <%# Eval("Id") %>
-                        <br />
-
+                    <div>
                         <iframe title="YouTube video player" class="youtube-player" type="text/html"
-                            width="640" height="390" src='<%# Eval("VideoEmbebbedUrl") %>'
+                            width="640" height="390" src='<%# Eval("VideoUrl") %>'
                             frameborder="0" allowfullscreen></iframe>
-
-                        <asp:LinkButton runat="server" Text="Одобрить" CommandArgument='<%# Eval("Id") %>' OnClick="Like_Click"></asp:LinkButton>
                     </div>
                 </ItemTemplate>
             </asp:Repeater>
