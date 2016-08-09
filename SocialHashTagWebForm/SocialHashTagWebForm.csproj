@@ -216,8 +216,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Core\IMessageProvider.cs" />
+    <Compile Include="Core\Repository\RepositoryManager.cs" />
     <Compile Include="Core\Repository\VideoHashTagDbContext.cs" />
     <Compile Include="Core\Repository\VideoHashTag.cs" />
+    <Compile Include="Core\Requester.cs" />
     <Compile Include="Core\ViewModels\MessageItemVIewModel.cs" />
     <Compile Include="Core\Vkontakte\NewsSearchModels\NewsSearch.cs" />
     <Compile Include="Core\Vkontakte\VideoGetModels\Item.cs" />

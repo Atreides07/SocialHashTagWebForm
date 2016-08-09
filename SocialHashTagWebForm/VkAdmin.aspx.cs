@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.UI;
@@ -78,25 +79,12 @@ namespace SocialHashTagWebForm
                 var mvm = messagesViewModel.FirstOrDefault(i => i.Id == messageId);
                 if (mvm != null)
                 {
-                    var videoTag=new VideoHashTag();
-                    videoTag.UniqueId = mvm.UniqueId;
-                    videoTag.Id = mvm.Id;
-                    videoTag.AddTime = DateTime.UtcNow;
-                    videoTag.SourceProvider = vkMessageProvider.ProviderName;
-                    videoTag.Tag = WebConfigurationManager.AppSettings["hashtag"];
-                    videoTag.VideoUrl = mvm.VideoEmbebbedUrl;
-
-                    var context=new VideoHashTagDbContext();
-                    var videoHashTag = await context.Videos.FirstOrDefaultAsync(i => i.UniqueId == videoTag.UniqueId);
-                    if (videoHashTag==null)
-                    {
-                        context.Videos.Add(videoTag);
-                        await context.SaveChangesAsync();
-                    }
-                    
+                    await new RepositoryManager().SaveMessageViewModel(mvm,vkMessageProvider.ProviderName);
                 }
             }
 
         }
+
+        
     }
 }
