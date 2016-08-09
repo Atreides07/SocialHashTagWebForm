@@ -20,8 +20,8 @@
                             width="640" height="390" src='<%# Eval("VideoEmbebbedUrl") %>'
                             frameborder="0" allowfullscreen></iframe>
                         
-                        <asp:LinkButton Visible='<%# Eval("Approved") %>' runat="server" Text="Одобрить" ForeColor="Green" CommandArgument='<%# Eval("Id") %>'  OnClick="Like_Click"></asp:LinkButton>
-                        <asp:LinkButton Visible='<%# Eval("Unknown") %>' runat="server" Text="Отозвать" ForeColor="Red" CommandArgument='<%# Eval("Id") %>'  OnClick="UnLike_Click"></asp:LinkButton>
+                        <asp:LinkButton runat="server" Text="Одобрить" ForeColor="Green" CommandArgument='<%# Eval("Id") %>'  OnClick="Like_Click"></asp:LinkButton>
+                        <asp:LinkButton runat="server" Text="Отозвать" ForeColor="Red" CommandArgument='<%# Eval("Id") %>'  OnClick="UnLike_Click"></asp:LinkButton>
                     </div>
                 </ItemTemplate>
             </asp:Repeater>
