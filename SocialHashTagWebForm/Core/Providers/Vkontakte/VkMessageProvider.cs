@@ -18,8 +18,8 @@ namespace SocialHashTagWebForm.Core.Providers.Vkontakte
                 throw new UnauthorizedAccessException();
             }
 
-            var requestUri = string.Format(requestUrlFormat, tag);
             var response=await new Requester<NewsSearch>().GetResponse(requestUri);
+            var requestUri = string.Format(requestUrlFormat, Uri.EscapeDataString(tag));
             var result = new List<MessageItem>();
             foreach (var item in response.Response.Items)
             {
