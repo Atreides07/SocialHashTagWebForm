@@ -20,6 +20,8 @@ namespace SocialHashTagWebForm.Core.Repository
             videoTag.SourceProvider = providerName;
             videoTag.Tag = WebConfigurationManager.AppSettings["hashtag"];
             videoTag.VideoUrl = mvm.VideoEmbebbedUrl;
+            videoTag.AuthorUrl = mvm.AuthorUrl;
+            videoTag.AuthorName = mvm.AuthorName;
 
             var context = new VideoHashTagDbContext();
             var videoHashTag = await context.Videos.FirstOrDefaultAsync(i => i.UniqueId == videoTag.UniqueId);

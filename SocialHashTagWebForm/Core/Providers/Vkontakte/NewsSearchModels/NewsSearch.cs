@@ -8,7 +8,6 @@ namespace SocialHashTagWebForm.Core.Vkontakte.NewsSearchModels
         [JsonProperty("response")]
         public Response Response { get; set; }
     }
-
     public class Response
     {
         [JsonProperty("items")]
@@ -17,8 +16,11 @@ namespace SocialHashTagWebForm.Core.Vkontakte.NewsSearchModels
         public int Count { get; set; }
         [JsonProperty("total_count")]
         public int TotalCount { get; set; }
+        [JsonProperty("profiles")]
+        public List<Profile> Profiles { get; set; }
+        [JsonProperty("groups")]
+        public List<Group> Groups { get; set; }
     }
-
     public class Item
     {
         [JsonProperty("id")]
@@ -42,19 +44,6 @@ namespace SocialHashTagWebForm.Core.Vkontakte.NewsSearchModels
         [JsonProperty("reposts")]
         public Reposts Reposts { get; set; }
     }
-
-    public class Reposts
-    {
-        [JsonProperty("count")]
-        public int Count { get; set; }
-    }
-
-    public class Likes
-    {
-        [JsonProperty("count")]
-        public int Count { get; set; }
-    }
-
     public class Attachment
     {
         [JsonProperty("type")]
@@ -62,7 +51,6 @@ namespace SocialHashTagWebForm.Core.Vkontakte.NewsSearchModels
         [JsonProperty("video")]
         public Video Video { get; set; }
     }
-
     public class Video
     {
         [JsonProperty("id")]
@@ -92,10 +80,50 @@ namespace SocialHashTagWebForm.Core.Vkontakte.NewsSearchModels
         [JsonProperty("can_add")]
         public int CanAdd { get; set; }
     }
-
     public class Comments
     {
         [JsonProperty("count")]
         public int Count { get; set; }
     }
+    public class Likes
+    {
+        [JsonProperty("count")]
+        public int Count { get; set; }
+    }
+    public class Reposts
+    {
+        [JsonProperty("count")]
+        public int Count { get; set; }
+    }
+    public class Profile
+    {
+        [JsonProperty("id")]
+        public int Id { get; set; }
+        [JsonProperty("first_name")]
+        public string FirstName { get; set; }
+        [JsonProperty("last_name")]
+        public string LastName { get; set; }
+        [JsonProperty("hidden")]
+        public int Hidden { get; set; }
+    }
+    public class Group
+    {
+        [JsonProperty("id")]
+        public int Id { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
+        [JsonProperty("screen_name")]
+        public string ScreenName { get; set; }
+        [JsonProperty("is_closed")]
+        public int IsClosed { get; set; }
+        [JsonProperty("type")]
+        public string Type { get; set; }
+        [JsonProperty("photo_50")]
+        public string Photo50 { get; set; }
+        [JsonProperty("photo_100")]
+        public string Photo100 { get; set; }
+        [JsonProperty("photo_200")]
+        public string Photo200 { get; set; }
+    }
+
 }

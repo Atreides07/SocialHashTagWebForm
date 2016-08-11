@@ -14,6 +14,9 @@ namespace SocialHashTagWebForm.Core.Repository
         public string VideoUrl { get; set; }
         public string Tag { get; set; }
 
+        public string AuthorName { get; set; }
+        public string AuthorUrl { get; set; }
+
         public DateTime AddTime { get; set; }
     }
 }

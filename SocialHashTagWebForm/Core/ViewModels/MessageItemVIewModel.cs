@@ -36,11 +36,17 @@ namespace SocialHashTagWebForm.Core.ViewModels
             this.MessageUrl = messageItem.MessageUrl;
             this.Provider = messageItem.Provider;
             this.VideoEmbebbedUrl = messageItem.VideoEmbebbedUrl;
+            this.AuthorName=messageItem.AuthorName;
+            this.AuthorUrl=messageItem.AuthorUrl;
             UniqueId = providerName + "_" + messageItem.Id;
             var videoHashTag = context.Videos.FirstOrDefault(i => i.UniqueId == UniqueId);
             Approved = videoHashTag!=null;
             Unknown = !Approved;
         }
+
+        public string AuthorUrl { get; set; }
+
+        public string AuthorName { get; set; }
 
         public bool Unknown { get; set; }
 

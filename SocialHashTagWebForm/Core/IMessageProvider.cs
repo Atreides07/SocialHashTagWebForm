@@ -42,6 +42,7 @@ namespace SocialHashTagWebForm.Core
         public string VideoEmbebbedUrl { get; set; }
         public string Message { get; set; }
         public string MessageUrl { get; set; }
-        
+        public string AuthorName { get; set; }
+        public string AuthorUrl { get; set; }
     }
 }

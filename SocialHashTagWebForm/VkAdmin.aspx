@@ -19,9 +19,11 @@
                         <iframe title="YouTube video player" class="youtube-player" type="text/html"
                             width="640" height="390" src='<%# Eval("VideoEmbebbedUrl") %>'
                             frameborder="0" allowfullscreen></iframe>
-                        
+                        <br />
+                        <a href='<%# Eval("AuthorUrl") %>'><%# Eval("AuthorName") %></a>
                         <asp:LinkButton runat="server" Text="Одобрить" ForeColor="Green" CommandArgument='<%# Eval("Id") %>'  OnClick="Like_Click"></asp:LinkButton>
                         <asp:LinkButton runat="server" Text="Отозвать" ForeColor="Red" CommandArgument='<%# Eval("Id") %>'  OnClick="UnLike_Click"></asp:LinkButton>
+                        <hr/>
                     </div>
                 </ItemTemplate>
             </asp:Repeater>
