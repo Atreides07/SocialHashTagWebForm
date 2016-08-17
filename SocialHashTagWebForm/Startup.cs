@@ -8,6 +8,7 @@ using System.Web.OData.Extensions;
 using System.Web.OData.Routing;
 using System.Web.OData.Routing.Conventions;
 using Microsoft.Owin;
+using Microsoft.Owin.Cors;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Owin;
@@ -26,6 +27,24 @@ namespace SocialHashTagWebForm
         public void Configuration(IAppBuilder app)
         {
             app.Use(typeof(CookiesMiddleware));
+
+            app.UseCors(new CorsOptions
+            {
+                PolicyProvider = new CorsPolicyProvider
+                {
+                    PolicyResolver = (request) => 
+                    {
+                        return Task.FromResult(new System.Web.Cors.CorsPolicy
+                        {
+                            AllowAnyHeader = true,
+                            AllowAnyMethod = true,
+                            AllowAnyOrigin = true,
+                            PreflightMaxAge = 100,
+                            SupportsCredentials = true
+                        });
+                    }
+                }
+            });
 
             // Мигрируем базу с нормальным запуском Seed из Configuration
             // http://stackoverflow.com/a/17339310
