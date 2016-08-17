@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.Http;
+using System.Web.Http.Controllers;
 using Microsoft.AspNet.Identity.Owin;
 using SocialHashTagWebForm.Core;
 using SocialHashTagWebForm.Core.Providers.Vkontakte;
@@ -15,13 +16,16 @@ namespace SocialHashTagWebForm.Controller
 {
     public class ActionsController : ApiController
     {
-        readonly VideoHashTagDbContext _db;
+        VideoHashTagDbContext _db;
 
-        public ActionsController()
+        protected override void Initialize(HttpControllerContext controllerContext)
         {
+            base.Initialize(controllerContext);
+
             _db = Request.GetOwinContext().Get<VideoHashTagDbContext>();
         }
 
+        [HttpGet]
         [Route("api/" + nameof(RefreshAllProviders))]
         public IHttpActionResult RefreshAllProviders()
         {

@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Controllers;
 using System.Web.OData;
 using Microsoft.AspNet.Identity.Owin;
 using SocialHashTagWebForm.Core.Repository;
@@ -15,10 +16,12 @@ namespace SocialHashTagWebForm.Controller
     [EnableQuery]
     public class VideosController : ODataController
     {
-        private readonly VideoHashTagDbContext _db;
+        VideoHashTagDbContext _db;
 
-        public VideosController()
+        protected override void Initialize(HttpControllerContext controllerContext)
         {
+            base.Initialize(controllerContext);
+
             _db = Request.GetOwinContext().Get<VideoHashTagDbContext>();
         }
 
