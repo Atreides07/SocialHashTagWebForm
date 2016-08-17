@@ -18,5 +18,7 @@ namespace SocialHashTagWebForm.Core.Repository
         public string AuthorUrl { get; set; }
 
         public DateTime AddTime { get; set; }
+
+        public bool IsApproved { get; set; }
     }
 }
