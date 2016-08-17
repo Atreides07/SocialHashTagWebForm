@@ -2,7 +2,7 @@
 
 namespace SocialHashTagWebForm.Core.Vkontakte.VideoGetModels
 {
-    public class VedioGetResponse
+    public class VideoGetResponse
     {
         [JsonProperty("response")]
         public Response Response { get; set; }

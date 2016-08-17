@@ -1,5 +1,7 @@
-﻿using System.Data.Entity.Migrations;
+﻿using System;
+using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.OData.Builder;
 using System.Web.OData.Extensions;
@@ -12,9 +14,10 @@ using Owin;
 using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
 using SocialHashTagWebForm.Core.Repository;
+using AppFunc = System.Func<System.Collections.Generic.IDictionary<string, object>, System.Threading.Tasks.Task>;
 
 namespace SocialHashTagWebForm
-{
+{    
     public partial class Startup
     {
         private HttpConfiguration _config;
@@ -22,6 +25,8 @@ namespace SocialHashTagWebForm
 
         public void Configuration(IAppBuilder app)
         {
+            app.Use(typeof(CookiesMiddleware));
+
             // Мигрируем базу с нормальным запуском Seed из Configuration
             // http://stackoverflow.com/a/17339310
             var configuration = new DbMigrationsConfiguration<VideoHashTagDbContext>

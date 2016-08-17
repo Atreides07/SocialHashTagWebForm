@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
+using Microsoft.Owin;
 using Newtonsoft.Json;
 using SocialHashTagWebForm.Core.Vkontakte.NewsSearchModels;
 using SocialHashTagWebForm.Core.Vkontakte.VideoGetModels;
@@ -22,7 +24,6 @@ namespace SocialHashTagWebForm.Core.Providers.Vkontakte
             var requestUri = string.Format(requestUrlFormat, Uri.EscapeDataString(tag));
             var response = await new Requester<NewsSearch>().GetResponse(requestUri);
 
-
             var listGroups = (response.Response.Groups ?? new List<Group>());
             var listProfiles = (response.Response.Profiles ?? new List<Profile>());
             foreach (var listProfile in listProfiles)
@@ -36,8 +37,8 @@ namespace SocialHashTagWebForm.Core.Providers.Vkontakte
                 listGroup.Name = GetUtf8NameFromWindows1251(listGroup.Name);
             }
 
-            var groups = listGroups.ToDictionary(i=>i.Id,i=>i);
-            var profiles = listProfiles.ToDictionary(i=>i.Id,i=>i);
+            var groups = listGroups.ToDictionary(i => i.Id, i => i);
+            var profiles = listProfiles.ToDictionary(i => i.Id, i => i);
 
             var result = new List<MessageItem>();
             foreach (var item in response.Response.Items)
@@ -47,9 +48,8 @@ namespace SocialHashTagWebForm.Core.Providers.Vkontakte
             }
             return result;
         }
-        
 
-        private async Task<MessageItem> GetMessageItem(Item item, Dictionary<int,Group> groups, Dictionary<int,Profile> profiles)
+        private async Task<MessageItem> GetMessageItem(Item item, Dictionary<int, Group> groups, Dictionary<int, Profile> profiles)
         {
             string name = null;
             string authorUrl;
@@ -82,8 +82,8 @@ namespace SocialHashTagWebForm.Core.Providers.Vkontakte
                 Provider = "VK",
                 Message = item.Text,
                 MessageUrl = item.Id.ToString(),
-                AuthorName=name,
-                AuthorUrl=authorUrl
+                AuthorName = name,
+                AuthorUrl = authorUrl
             };
 
             if (messageItem.Message != null && messageItem.Message.Length > 1000)
@@ -115,7 +115,7 @@ namespace SocialHashTagWebForm.Core.Providers.Vkontakte
         private async Task<string> GetVideoUrl(Attachment videoAttach, string videId)
         {
             var url = $"https://api.vk.com/method/video.get?count=50&videos={videId}&v=5.53&access_token=" + AccessCode;
-            var videoGetResponse = await new Requester<VedioGetResponse>().GetResponse(url);
+            var videoGetResponse = await new Requester<VideoGetResponse>().GetResponse(url);
 
             return videoGetResponse.Response?.Items.FirstOrDefault()?.Player;
         }
@@ -139,7 +139,34 @@ namespace SocialHashTagWebForm.Core.Providers.Vkontakte
         private string authUrl = "https://oauth.vk.com/authorize?client_id=5575720&redirect_uri=http://hashtags.1gb.ru/verify";
 
         private string token = "a431445d5b967cd10927b06e5e654b33e3fe017db7772c5bc172c5c543cab44ab11bb5234bef58ffee46b";
-        public static string AccessCode { get; set; }
+
+        readonly static Dictionary<string, string> _sessionsAccessCodes = new Dictionary<string, string>();
+
+        public static string AccessCode
+        {
+            get
+            {
+                if (HttpContext.Current.Request.Cookies.Keys.Cast<string>().Any(k => k == CookiesMiddleware.COOCKIE_SESSION))
+                {
+                    string code;
+
+                    if (_sessionsAccessCodes.TryGetValue(HttpContext.Current.Request.Cookies[CookiesMiddleware.COOCKIE_SESSION].Value, out code))
+                    {
+                        return code;
+                    }
+                }
+
+                return String.Empty;
+            }
+            set
+            {
+                if (HttpContext.Current.Request.Cookies.Keys.Cast<string>().Any(k => k == CookiesMiddleware.COOCKIE_SESSION))
+                {
+                    _sessionsAccessCodes[HttpContext.Current.Request.Cookies[CookiesMiddleware.COOCKIE_SESSION].Value] = value;
+                }
+            }
+        }
+
         public string ProviderName { get; } = "Vkontakte";
     }
 

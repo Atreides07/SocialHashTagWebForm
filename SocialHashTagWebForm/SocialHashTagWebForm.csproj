@@ -259,6 +259,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controller\VideosController.cs" />
+    <Compile Include="CookiesMiddleware.cs" />
     <Compile Include="Core\IMessageProvider.cs" />
     <Compile Include="Core\Providers\FaceBook\FacebookMessageProvider.cs" />
     <Compile Include="Core\Repository\RepositoryManager.cs" />
@@ -269,7 +270,7 @@
     <Compile Include="Core\Providers\Vkontakte\NewsSearchModels\NewsSearch.cs" />
     <Compile Include="Core\Providers\Vkontakte\VideoGetModels\Item.cs" />
     <Compile Include="Core\Providers\Vkontakte\VideoGetModels\Response.cs" />
-    <Compile Include="Core\Providers\Vkontakte\VideoGetModels\VedioGetResponse.cs" />
+    <Compile Include="Core\Providers\Vkontakte\VideoGetModels\VdeoGetResponse.cs" />
     <Compile Include="Core\Providers\Vkontakte\VkMessageProvider.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
